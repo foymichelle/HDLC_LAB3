@@ -86,8 +86,12 @@ public class SecondaryStation {
 						answer = in.readLine();						
 						
 						if(answer.toLowerCase().equals("y") || answer.toLowerCase().equals("yes")) {
-							System.out.println("Please enter the destination address using 8-bits binary string (e.g. 00000001):");
-							address = in.readLine();
+							boolean validAddr = false;
+							while (!validAddr) {
+								System.out.println("Please enter the destination address using 8-bits binary string (e.g. 00000001):");
+								address = in.readLine();
+								validAddr = validateAddress(address);
+							}
 							
 							System.out.println("Please enter the message to send?");
 							answer = in.readLine();
@@ -184,6 +188,25 @@ public class SecondaryStation {
 		}
 		
 		return resultString;
+	}
+	
+	/*
+	 * Method to validate correct binary address
+	 */
+	
+	public static boolean validateAddress(String address) {
+		if (address.length() != 8) {
+			System.out.println("Must enter address of 8-bit length.");
+			return false;
+		}
+		
+		for (int i=0; i<address.length(); i++) {
+			if (address.charAt(i) != '0' && address.charAt(i) != '1') {
+				System.out.println("Found invalid character in bit string.");
+			}
+		}
+		
+		return true;
 	}
 
 }// end of class SecondaryStation
