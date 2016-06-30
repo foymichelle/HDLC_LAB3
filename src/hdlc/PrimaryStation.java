@@ -215,6 +215,7 @@ public class PrimaryStation{
 							String frameToSend = flag + address[j] + "00000000" +  sMessages[i].substring(8,sMessages[i].length());
 							s_out[j].println(frameToSend);
 							System.out.println("Sent frame ("+frameToSend+") to "+address[j]);
+							sMessages[i] = null;
 						}
 					} catch (NullPointerException e) {
 						continue;

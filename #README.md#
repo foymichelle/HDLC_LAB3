@@ -10,6 +10,9 @@ Start SecondaryStation (station C)
 ## Communication procedure:
 B sends Frame 0 to A
 B sends Frame 0 to C
+C sends Frame 0 to B
+B sends Frame 1 to A
+C sends Frame 0 to A
 
 ## Communication from B to A
 ####On station B console:
