@@ -13,7 +13,8 @@ Start SecondaryStation (station C)
 3. C sends Frame 0 to B
 4. B sends Frame 1 to A
 5. C sends Frame 0 to A
-6. 
+6. B sends Frame 1 to C
+7. C sends Frame 1 to B
 
 ## Communication from B to A
 ####On station B console:
