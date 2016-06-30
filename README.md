@@ -3,9 +3,9 @@
 # Test Case
 
 ## Initiation of stations
-Start PrimaryStation (station A)
-Start SecondaryStation (station B)
-Start SecondaryStation (station C)
+1. Start PrimaryStation (station A)
+2. Start SecondaryStation (station B)
+3. Start SecondaryStation (station C)
 
 ## Communication procedure:
 1. B sends Frame 0 to A
