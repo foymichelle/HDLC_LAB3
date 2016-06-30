@@ -112,6 +112,7 @@ public class SecondaryStation {
 							// insert codes here to send ??RR,*,F??
 							String SFrameToSend = flag + "00000000" + "10000" + threeBitBinary(nr);
 							os.println(SFrameToSend);
+							System.out.println("Send S Frame");
 							//===========================================================
 						}
 					}

@@ -179,8 +179,6 @@ public class PrimaryStation{
         			if(response.substring(0,4).equals("1000")) {
         				// recv â€œRR,*,Fâ€, no data to send from B
         				System.out.println("Receive RR, *, F from station " + clientID[i]);
-        				nr[i] = Integer.parseInt(response.substring(21,24), 2);
-        				System.out.println("nr["+i+"] = "+nr[i]);
         			}
         			else if(response.substring(0, 1).equals("0")) {
                 		// ==============================================================
