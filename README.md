@@ -16,7 +16,7 @@ Start SecondaryStation (station C)
 6. B sends Frame 1 to C
 7. C sends Frame 1 to B
 
-## Communication from B to A
+## Communication from B to A (Frame 0)
 ####On station B console:
 
 > Is there any message to send? (y/n)
@@ -37,7 +37,19 @@ Start SecondaryStation (station C)
 
 > Message received from 00000001: Frame 0 from B to A
 
-## Comunication from B to C
+> Connection from /127.0.0.1 accepted.
+
+> accepted client
+
+> client address: 00000010
+
+> Sent SNRM to station 2
+
+> Received UA from station 2
+
+> Sent < RR,*,P > to station 1
+
+## Comunication from B to C (Frame 0)
 ####On station B console:
 
 > recv msg -- control 10001000
@@ -54,9 +66,14 @@ Start SecondaryStation (station C)
 
 > Frame 0 from B to C
 
-NOTE: Will need to wait until C sends a frame to see message from B on C console.
+####Should see on station B console
+> Received data: Frame 0 from B to C
 
-## Communication from C to B
+> recv msg -- control 10001000
+
+> Is there any message to send? (y/n)
+
+## Communication from C to B (Frame 0)
 ####On station C console
 > Is there any message to send? (y/n)
 
@@ -74,3 +91,41 @@ NOTE: Will need to wait until C sends a frame to see message from B on C console
 
 > Received data: Frame 0 from B to C // Frame sent above from B
 
+NOTE: Will need to wait until B sends a frame to see message from C on B console.
+
+## Communication from B to A (Frame 1)
+#### On station B console
+
+> Is there any message to send? (y/n)
+
+> y
+
+> Please enter the destination address using 8-bits binary string (e.g. 00000001):
+
+> 00000000
+
+> Please enter the message to send?
+
+> Frame 1 from B to A
+
+#### Should see on station A console
+
+> Message received from 00000001: Frame 1 from B to A
+
+> Sent < RR,*,P > to station 2
+
+## Communication from C to A (Frame 0)
+#### On station C console
+> Is there any message to send? (y/n)
+
+> y
+
+> Please enter the destination address using 8-bits binary string (e.g. 00000001):
+
+> 00000000
+
+> Please enter the message to send?
+
+> Frame 0 from C to A
+
+#### Should see on station A console
