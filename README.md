@@ -66,12 +66,7 @@ Start SecondaryStation (station C)
 
 > Frame 0 from B to C
 
-####Should see on station B console
-> Received data: Frame 0 from B to C
-
-> recv msg -- control 10001000
-
-> Is there any message to send? (y/n)
+NOTE: Will need to wait until C sends a frame to see message from B on C console.
 
 ## Communication from C to B (Frame 0)
 ####On station C console
@@ -91,7 +86,12 @@ Start SecondaryStation (station C)
 
 > Received data: Frame 0 from B to C // Frame sent above from B
 
-NOTE: Will need to wait until B sends a frame to see message from C on B console.
+####Should see on station B console
+> Received data: Frame 0 from B to C
+
+> recv msg -- control 10001000
+
+> Is there any message to send? (y/n)
 
 ## Communication from B to A (Frame 1)
 #### On station B console
