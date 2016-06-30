@@ -103,13 +103,14 @@ public class SecondaryStation {
 							// insert codes here to send an I msg;
 							String IFrameToSend = flag + address + "01110000" + answer;
 							os.println(IFrameToSend);
+							
 							//===========================================================
 						
 						}				
 						else {
 							//===========================================================
 							// insert codes here to send ??RR,*,F??
-							String SFrameToSend = flag + "00000000" + "10000000";
+							String SFrameToSend = flag + "00000000" + "10000" + threeBitBinary(nr);
 							os.println(SFrameToSend);
 							//===========================================================
 						}
@@ -122,8 +123,10 @@ public class SecondaryStation {
 						System.out.println("");
 						System.out.println("Received data: " + data);						
 						
-						nr = Integer.parseInt(response.substring(1,4), 2) + 1;
-//						System.out.println("nr: " + nr);
+						nr = Integer.parseInt(response.substring(1,4), 2);
+						System.out.println("nr: " + nr);
+						ns++;
+						//nr++;
 					}
 				}
 			} 
@@ -207,6 +210,23 @@ public class SecondaryStation {
 		}
 		
 		return true;
+	}
+	
+	/*
+	 * Method to convert decimal number to binary
+	 */
+	
+	public static String threeBitBinary(int number) {
+		String binaryString = Integer.toBinaryString(number);
+
+		if (binaryString.length() == 1) {
+			binaryString = "00" + binaryString;
+		}
+		else if (binaryString.length() == 2) {
+			binaryString = "0" + binaryString;
+		}
+		
+		return binaryString;
 	}
 
 }// end of class SecondaryStation

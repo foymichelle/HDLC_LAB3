@@ -179,12 +179,17 @@ public class PrimaryStation{
         			if(response.substring(0,4).equals("1000")) {
         				// recv â€œRR,*,Fâ€, no data to send from B
         				System.out.println("Receive RR, *, F from station " + clientID[i]);
+        				nr[i] = Integer.parseInt(response.substring(21,24), 2);
+        				System.out.println("nr["+i+"] = "+nr[i]);
         			}
         			else if(response.substring(0, 1).equals("0")) {
                 		// ==============================================================
         				// insert codes here to handle the frame â€œI, *, *â€ received
         				
         					String addrRec = inputLine.substring(8, 16);
+        					String ctrlRec = inputLine.substring(16, 24);
+        					String nrRec = inputLine.substring(21,24);
+        					nr[i] = Integer.parseInt(nrRec, 2);
         					String msgRec = inputLine.substring(24,inputLine.length());
         				
         					//if the frame is to the primary station; consume it
@@ -200,6 +205,8 @@ public class PrimaryStation{
         				
                 		// ==============================================================
         			}
+        			ns[i]++;
+        			//nr[i]++;
         		}
         	}
         	
@@ -212,7 +219,8 @@ public class PrimaryStation{
 					try {
 						String addrBuff = sMessages[i].substring(0, 8);
 						if (addrBuff.equals(address[j])) {
-							String frameToSend = flag + address[j] + "00000000" +  sMessages[i].substring(8,sMessages[i].length());
+							String controlField = "0" + threeBitBinary(ns[i]) + "0" + threeBitBinary(nr[i]);
+							String frameToSend = flag + address[j] + controlField +  sMessages[i].substring(8,sMessages[i].length());
 							s_out[j].println(frameToSend);
 							System.out.println("Sent frame ("+frameToSend+") to "+address[j]);
 							sMessages[i] = null;
@@ -275,5 +283,22 @@ public class PrimaryStation{
 		}
 		
 		return resultString;
+	}
+	
+	/*
+	 * Method to convert decimal number to binary
+	 */
+	
+	public static String threeBitBinary(int number) {
+		String binaryString = Integer.toBinaryString(number);
+
+		if (binaryString.length() == 1) {
+			binaryString = "00" + binaryString;
+		}
+		else if (binaryString.length() == 2) {
+			binaryString = "0" + binaryString;
+		}
+		
+		return binaryString;
 	}
 }// end of class PrimaryStation
