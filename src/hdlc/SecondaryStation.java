@@ -92,6 +92,9 @@ public class SecondaryStation {
 							System.out.println("Please enter the message to send?");
 							answer = in.readLine();
 							
+							// convert to binary
+							answer = toBytes(answer);
+							
 							//===========================================================
 							// insert codes here to send an I msg;
 							String IFrameToSend = flag + address + "01110000" + answer;
@@ -111,6 +114,7 @@ public class SecondaryStation {
 					// recv an I frame
 					if(response.substring(0,1).equals("0")) {
 						String data = responseLine.substring(24, responseLine.length());
+						data = decodeBinary(data);
 						System.out.println("");
 						System.out.println("Received data: " + data);						
 						
@@ -126,6 +130,60 @@ public class SecondaryStation {
 				System.err.println("IOException: " + e);
 			}	
 		}
+	}
+	
+	/*
+	 * Method to convert string of characters into bytes (cannot exceed 64 bytes)
+	 */
+	
+	public static String toBytes(String message) {
+		byte[] msgBytes = message.getBytes();
+		
+		if (msgBytes.length > 64) {
+			System.out.println("Message exceeds 64 bytes! Try again.");
+			return null;
+		}
+		
+		StringBuilder msgBinary = new StringBuilder();
+		
+		for (byte b : msgBytes) {
+			int value = b;
+			
+			for (int i=0; i<8; i++) {
+				msgBinary.append((value & 128) == 0 ? 0 : 1);
+		        value <<= 1;
+			}
+		}
+		
+		return msgBinary.toString();
+	}
+	
+	/*
+	 * Method to convert binary message to readable String
+	 */
+	
+	public static String decodeBinary(String bin) {
+
+		char[] result = bin.toCharArray();
+		
+		String conversionString = "";
+		String resultString = "";
+		int binChar = 0;
+		char asciiChar = '0';
+		
+		for(int i = 0; i<result.length; i++)
+		{
+			conversionString = conversionString+result[i];
+			if(i!= 0 && (i+1)%8 == 0)
+			{
+				binChar = Integer.parseInt(conversionString,2);
+				asciiChar = (char)binChar;
+				resultString = resultString+asciiChar;
+				conversionString = "";
+			}
+		}
+		
+		return resultString;
 	}
 
 }// end of class SecondaryStation

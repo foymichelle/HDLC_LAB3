@@ -190,6 +190,7 @@ public class PrimaryStation{
         					//if the frame is to the primary station; consume it
         					//if the frame is to the secondary station; buffer the frame to send
         					if (addrRec.equals("00000000")) {
+        						msgRec = decodeBinary(msgRec);
         						System.out.println("Message received from "+address[i]+": "+msgRec);
         					}
         					else {
@@ -246,4 +247,32 @@ public class PrimaryStation{
         serverSocket.close();
         
     }// end main 
+    
+    /*
+	 * Method to convert binary message to readable String
+	 */
+	
+	public static String decodeBinary(String bin) {
+
+		char[] result = bin.toCharArray();
+		
+		String conversionString = "";
+		String resultString = "";
+		int binChar = 0;
+		char asciiChar = '0';
+		
+		for(int i = 0; i<result.length; i++)
+		{
+			conversionString = conversionString+result[i];
+			if(i!= 0 && (i+1)%8 == 0)
+			{
+				binChar = Integer.parseInt(conversionString,2);
+				asciiChar = (char)binChar;
+				resultString = resultString+asciiChar;
+				conversionString = "";
+			}
+		}
+		
+		return resultString;
+	}
 }// end of class PrimaryStation
