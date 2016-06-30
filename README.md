@@ -1,6 +1,6 @@
 # HDLC_LAB3
 
-# Test Case:
+# Test Case
 
 ## Initiation of stations
 Start PrimaryStation (station A)
