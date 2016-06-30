@@ -129,3 +129,47 @@ NOTE: Will need to wait until C sends a frame to see message from B on C console
 > Frame 0 from C to A
 
 #### Should see on station A console
+> Message received from 00000010: Frame 0 from C to A
+
+> Sent < RR,*,P > to station 1
+
+## Communication from B to C (Frame 1)
+#### On station B console
+> Is there any message to send? (y/n)
+
+> y
+
+> Please enter the destination address using 8-bits binary string (e.g. 00000001):
+
+> 00000010
+
+> Please enter the message to send?
+
+> Frame 1 from B to C
+
+NOTE: Will need to wait until C sends a frame to see message from B on C console.
+
+## Communication from C to B (Frame 1)
+#### On station C console
+> Is there any message to send? (y/n)
+
+> y
+
+> Please enter the destination address using 8-bits binary string (e.g. 00000001):
+
+> 00000001
+
+> Please enter the message to send?
+
+> Frame 1 from C to B
+
+> recv msg -- control 00000000
+
+> Received data: Frame 1 from B to C // Frame sent above from B
+
+#### Should see on station B console
+> Received data: Frame 1 from C to B
+
+> recv msg -- control 10001000
+
+> Is there any message to send? (y/n)
